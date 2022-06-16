@@ -2,40 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrefabTest : MonoBehaviour
+public class Prefabtest : MonoBehaviour
 {
+    //itemをいれる
     public GameObject obj;
-    public GameObject cube;
 
-    Vector3 startpos;
-    Vector3 tmp;
-
+    //itemのstartpositionを入れる
+    Vector3 objstartpos;
+    Vector3 temp;
 
     // Start is called before the first frame update
     void Start()
     {
-        startpos = cube.transform.position;
+        objstartpos = obj.transform.position;
     }
-
 
     // Update is called once per frame
     void Update()
     {
-        tmp = cube.transform.position;
+         
 
         if (Input.GetMouseButtonDown(0))
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit))
-            {
-                if (startpos == tmp)
-                {
-                    GameObject instance = (GameObject)Instantiate(cube,
-                                         new Vector3(tmp.x, tmp.y, 0.0f),
-                                         Quaternion.identity);
-                }
-            }
+            
         }
 
+    }
+    private void OnMouseDown()
+    {
+        temp = objstartpos;
+
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit))
+        {
+            if (objstartpos == temp)
+            {
+                GameObject instance = (GameObject)Instantiate(obj,
+                                     new Vector3(temp.x, temp.y, 0.0f),
+                                     Quaternion.identity);
+            }
+        }
     }
 }
